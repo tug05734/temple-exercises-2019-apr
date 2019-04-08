@@ -1,13 +1,17 @@
 1. Add item to cart
+    - Method
+      - POST
+    - URL
+      - /customer_carts/{customer_id}/items
     - Inputs: 
-      - Product ID
-      - Quantity
+      - Array of item attributes
+        - Product ID
+        - Quantity
+        - Product Customization
       - Customer ID
-      - Product Customizations
     - Responses:
       - Cart ID
-      - Item in Cart ID
-      - List of other Item IDs in the Cart
+      - Items in Cart ID
     - Expected Result:
       - Item is added to cart with specified customizations
 2. Remove item from cart

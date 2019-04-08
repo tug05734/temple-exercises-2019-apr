@@ -1,7 +1,7 @@
 WHEN -- THEY WANT TO -- SO THAT
-1. WHEN the user finds something they like, 
-    THEY WANT TO add it to their cart, 
-    SO THAT they can purchase it.
+1. WHEN the user finds some things they like, 
+    THEY WANT TO add those to their cart, 
+    SO THAT they can purchase them.
 2. WHEN the user changes their mind,
     THEY WANT TO remove the item from their cart,
     SO THAT they do not accidentally buy it.

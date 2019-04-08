@@ -1,18 +1,74 @@
 openapi: 3.0.0
 info:
-  title: Sample API
-  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
-  version: 0.1.9
+  title: Shopping Cart API
+  description: |
+    The best shopping cart API you've ever seen.
+    If it's not the best API you've ever seen you're a liar.
+  version: 0.0.1
 servers:
   - url: http://api.example.com/v1
     description: Optional server description, e.g. Main (production) server
-  - url: http://staging-api.example.com
-    description: Optional server description, e.g. Internal staging server for testing
 paths:
-  /users:
-    get:
-      summary: Returns a list of users.
-      description: Optional extended description in CommonMark or HTML.
+  /customer_carts/{customer_id}/items:
+    post:
+      summary: Add item to cart
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          description: Identifier of the customer that the cart belongs to.
+          schema:
+            type : string
+          example: 577B4ADB-FCB6-43A5-845B-918A952CB9B4
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example: [
+              {
+                product_id: 14DAFFD0-7E0F-4B28-B7EF-19C6EF45704A,
+                quantity: 4,
+                customizations: {
+                    color: 'blue',
+                    sizeObj: {
+                      type: 'W',
+                      value: 10
+                    }
+                  }
+              },
+              {
+                product_id: 181BBDA8-030E-407A-8DC4-7F16A05F55FF,
+                quantity: 6,
+                customizations: {
+                    size: 4
+                  }
+              }
+            ]
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  product_id:
+                    type: string
+                    example: 14DAFFD0-7E0F-4B28-B7EF-19C6EF45704A
+                  quantity:
+                    type: integer
+                    minimum: 1
+                    maximum: 12
+                    example: 2
+                  customizations:
+                    type: object
+                    example: {
+                      color: 'blue',
+                      sizeObj: {
+                        type: 'W',
+                        value: 10
+                      }
+                    }
+                
+                  
       responses:
         '200':    # status code
           description: A JSON array of user names
