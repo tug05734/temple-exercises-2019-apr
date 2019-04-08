@@ -2,6 +2,7 @@
 In-Class Exercises
 
 ### Helpful Links
+Docs: https://inadarei.github.io/temple-exercises-2019-apr/index.html
 
 #### Open API Spec
 
