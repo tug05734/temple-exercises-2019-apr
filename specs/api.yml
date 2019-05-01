@@ -1,81 +1,121 @@
 openapi: 3.0.0
 info:
-  title: Shopping Cart API
+  title: Customer Service API
   description: |
-    The best shopping cart API you've ever seen.
-    If it's not the best API you've ever seen you're a liar.
-  version: 0.0.1
+    API that lets users view and update account and flight information.
+  version: 4.2.5
 servers:
   - url: http://api.example.com/v1
     description: Optional server description, e.g. Main (production) server
 paths:
-  /customer_carts/{customer_id}/items:
-    post:
-      summary: Add item to cart
+  /customers/{customer_id}/tickets/{ticket_id}:
+    get:
+      summary: Look up ticket info/flight number associated with user account
       parameters:
         - name: customer_id
           in: path
           required: true
-          description: Identifier of the customer that the cart belongs to.
+          description: Account User ID.
           schema:
-            type : string
-          example: 577B4ADB-FCB6-43A5-845B-918A952CB9B4
-      
+            type: string
+          example: mycoolusername123
+
+        - name: ticket_id
+          in: path
+          required: true
+          description: Flight Ticket ID Number.
+          schema:
+            type: string
+          example: '23840235108003'
+
       requestBody:
         required: true
         content:
           application/json:
-            example: [
-              {
-                product_id: 14DAFFD0-7E0F-4B28-B7EF-19C6EF45704A,
-                quantity: 4,
-                customizations: {
-                    color: 'blue',
-                    sizeObj: {
-                      type: 'W',
-                      value: 10
-                    }
-                  }
-              },
-              {
-                product_id: 181BBDA8-030E-407A-8DC4-7F16A05F55FF,
-                quantity: 6,
-                customizations: {
-                    size: 4
-                  }
-              }
-            ]
             schema:
-              type: array
+              type: string
               items:
-                type: object
-                properties:
-                  product_id:
-                    type: string
-                    example: 14DAFFD0-7E0F-4B28-B7EF-19C6EF45704A
-                  quantity:
-                    type: integer
-                    minimum: 1
-                    maximum: 12
-                    example: 2
-                  customizations:
-                    type: object
-                    example: {
-                      color: 'blue',
-                      sizeObj: {
-                        type: 'W',
-                        value: 10
-                      }
-                    }
-                
-                  
+                customer_id:
+                  type: string
+                  example: mycoolusername123
+
+                ticket_id:
+                  type: string
+                  example: '23840235108003'
+            example:
+              customer_id:
+                value: mycoolusername123
+              ticket_id:
+                value: '23840235108003'
+
       responses:
-        '200':    # status code
-          description: A JSON array of user names
+        "200": # status code
+          description: A JSON array of ticket and flight information
           content:
             application/json:
-              schema: 
+              schema:
                 type: array
-                items: 
+                items:
                   type: string
+                example:
+                  [
+                    "Departure": "Los Angeles International Airport LAX",
+                    "Arrival": "Dubai International Airport DXB",
+                    "Departure Date": "JUN-11-19",
+                    "Arrival Date" : "JUN-12-19",
+                    "Departure Time": "1450",
+                    "Arrival Time": "0345",
+                    "Seat Number": "22C",
+                    "Flight Number": "RR0425",
+                    "Class": "Economy",
+                    "Gate": "C11",
+                  ]
+  /customers/{customer_id}/account:
+    put:
+      summary: Update information associated with the users account
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          description: Identifier of the customer.
+          schema:
+            type: string
+          example: mycoolusername123
+
+      request body:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              items:
+                customer_id:
+                  type: string
+                  example: mycoolusername123
+            example:
+              customer_id:
+                value: mycoolusername123
+              ticket_id:
+                value: '23840235108003'
+      responses:
+        "200": # status code
+          description: A JSON array of account information after up updating
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  [
+                    "First Name": "John",
+                    "Last Name": "Doe",
+                    "Username": "myUpdatedcoolusername123",
+                    "Gender": "Male",
+                    "Prefered Credit Card": "**** **** **** 5639",
+                    "Address": "2142 W Red St",
+                    "City": "Drexel Hill",
+                    "State": "Pennsylvania",
+                    "ZIP Code": "19026",
+                  ]
 
