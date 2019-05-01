@@ -1,7 +1,4 @@
 .PHONY: docs
 docs:
-	redoc-cli bundle -o ./docs/index.html specs/api.yml
-
-.PHONY: docs-serve
-docs-serve:
-	redoc-cli serve -w -ssr -p 9999 specs/api.yml
+	- docker build -t docker .
+	- docker run -v C:\Users\Rajat\Desktop\dockerAssignment\temple-exercises-2019-apr\docs:/app/docs docker
