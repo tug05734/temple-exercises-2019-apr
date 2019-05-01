@@ -1,0 +1,15 @@
+    
+version: "3.7"
+services:  
+  nodejs:
+    build: 
+        context: .
+        dockerfile: Dockerfile
+    image: Docker
+    tty: true
+    volumes:
+      - C:\Users\Rajat\Desktop\dockerAssignment\temple-exercises-2019-apr\docs:/app/docs
+      - C:\Users\Rajat\Desktop\dockerAssignment\temple-exercises-2019-apr\node_modules:/app/node_modules
+    ports:
+      - "8080:8080"
+    working_dir: /app
